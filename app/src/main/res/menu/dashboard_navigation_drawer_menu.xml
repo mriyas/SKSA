@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="HardcodedText">
+
+<group android:id="@+id/group1">
+    <item
+        android:id="@+id/medicine"
+        android:title="@string/medicine_orders"
+        android:icon="@drawable/carbon_reminder_medical"
+        />
+</group>
+
+    <group android:id="@+id/group2">
+        <item
+            android:id="@+id/test1"
+            android:title="@string/test_results"
+            android:icon="@drawable/vector_7_"/>
+
+    </group>
+    <group android:id="@+id/group3">
+
+        <item
+            android:id="@+id/equipment"
+            android:title="@string/equipment_rent"
+            android:icon="@drawable/vector_8_"/>
+    </group>
+    <group android:id="@+id/group4">
+
+        <item
+            android:id="@+id/appointment"
+            android:title="@string/appoinments"
+            android:icon="@drawable/group_2_"/>
+    </group>
+    <group android:id="@+id/group5">
+
+        <item
+            android:id="@+id/help"
+            android:title="@string/help_and_support"
+            android:icon="@drawable/group_3_"/>
+    </group>
+    <group android:id="@+id/group6">
+
+        <item
+            android:id="@+id/logout"
+            android:title="@string/sign_out"
+            android:icon="@drawable/vector_9_"/>
+    </group>
+</menu>
+
+
+

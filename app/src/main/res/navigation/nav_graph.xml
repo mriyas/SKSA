@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/userMobileInputFragment">
+
+    <fragment
+        android:id="@+id/userMobileInputFragment"
+        android:name="com.suraksha.android.view.fragment.DashboardHomeFragment"
+        tools:layout="@layout/fragment_dashboard_home">
+        <!--<action
+            android:id="@+id/action_show_mobile_otp_verification"
+            app:destination="@id/userMobileOtpVerification"
+           />-->
+    </fragment>
+
+  <!--  <fragment
+        android:id="@+id/userMobileOtpVerification"
+        android:name="YOUE FRAGMENT CLASS"
+        tools:layout="YOUR FRAGMENT LAYOUT">
+        <action
+            android:id="@+id/action_show_user_types"
+            app:destination="@id/userTypesFragment"
+            />
+
+
+    </fragment>-->
+
+
+</navigation>

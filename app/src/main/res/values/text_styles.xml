@@ -1,0 +1,116 @@
+<resources>
+
+    <!--  text styles. -->
+
+    <style name="LabelTitleStyleBold1">
+        <item name="android:textColor">@color/text_black1</item>
+        <item name="android:textSize">@dimen/text_size_20</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">@dimen/margin_16</item>
+        <item name="android:layout_marginTop">@dimen/margin_32</item>
+        <item name="android:layout_marginStart">@dimen/margin_16</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="fontFamily">@font/poppinslight</item>
+    </style>
+
+    <style name="LabelTitleStyleBold2">
+        <item name="android:textColor">@color/text_black1</item>
+        <item name="android:textSize">@dimen/text_size_16</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity"> center</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="fontFamily">@font/poppinslight</item>
+    </style>
+    <style name="LabelTitleStyleBold3">
+        <item name="android:textColor">@color/text_black1</item>
+        <item name="android:textSize">@dimen/text_size_12</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="fontFamily">@font/poppinslight</item>
+    </style>
+
+    <style name="LabelSubTitleStyle1">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textSize">@dimen/text_size_16</item>
+        <item name="android:textColor">@color/text_black2</item>
+        <item name="fontFamily">@font/poppinslight</item>
+    </style>
+
+    <style name="LabelSubTitleStyle2">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textSize">@dimen/text_size_12</item>
+        <item name="android:textColor">@color/text_black2</item>
+        <item name="fontFamily">@font/poppinslight</item>
+    </style>
+
+    <style name="LabelSubTitleStyle3">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/text_size_10</item>
+    </style>
+
+    <style name="LabelHeaderStyleNormal1">
+        <item name="android:textColor">@color/text_black2</item>
+        <item name="android:textSize">@dimen/text_size_16</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_marginStart">@dimen/margin_16</item>
+        <item name="android:layout_marginTop">@dimen/margin_32</item>
+
+    </style>
+
+    <!-- edit text styles. -->
+
+
+    <style name="TimeTileStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/bg_schedule_color</item>
+        <item name="android:layout_marginStart">@dimen/margin_16</item>
+        <item name="android:layout_marginEnd">@dimen/margin_16</item>
+        <item name="android:layout_marginTop">@dimen/margin_24</item>
+        <item name="android:paddingTop">@dimen/default_padding_16</item>
+        <item name="android:paddingBottom">@dimen/default_padding_16</item>
+    </style>
+
+    <style name="EditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@null</item>
+        <item name="android:ems">10</item>
+    </style>
+
+
+    <!-- button styles. -->
+
+    <style name="Button">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:padding">24dip</item>
+        <item name="android:background">@color/purple</item>
+    </style>
+
+    <style name="Switch_Button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginEnd">@dimen/margin_5</item>
+    </style>
+
+    <!-- image styles. -->
+
+
+
+
+    <style name="Edit_image">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+
+</resources>
