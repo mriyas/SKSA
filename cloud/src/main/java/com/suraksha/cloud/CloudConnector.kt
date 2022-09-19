@@ -10,6 +10,7 @@ class CloudConnector {
 
     interface CloudConnectorInterface{
         fun getToken(): String
+        fun getAppId(): Long
         fun getContext(): Context
     }
 }

@@ -17,6 +17,7 @@ buildscript {
         classpath ("com.google.gms:google-services:${Versions.firebaseVersion}")
         classpath("com.jakewharton:butterknife-gradle-plugin:10.2.1")
         classpath("com.github.dcendents:android-maven-gradle-plugin:2.1")
+        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navVersion}")
 
 
     }

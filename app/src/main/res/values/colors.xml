@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">@color/suraksha_bg_color</color>
-    <color name="colorPrimaryDark">@color/suraksha_bg_color</color>
+    #<color name="colorPrimary">#FF9800</color>
+    <color name="colorPrimaryDark">#FF9800</color>
     <color name="colorAccent1">@color/suraksha_bg_accent</color>
     <color name="color_common_blue">#FF9800</color>
     <color name="colorAccent">#FF9800</color>
 
-    <color name="color_dark_blue">#A97FE2</color>
+    <color name="tool_bar_title_color">#06657B</color>
     <color name="color_light_blue">#55CBCD</color>
     <color name="black">#000000</color>
+    <color name="primaryTextColor">#3D3D3D</color>
     <color name="red">#F80303</color>
+    <color name="primaryButtonColor">#E84524</color>
     <color name="white">#FFFFFF</color>
     <color name="bg_white">#F6F4F0</color>
     <color name="grey">#999999</color>

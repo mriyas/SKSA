@@ -29,6 +29,9 @@ object AppDependencies {
         const val navKtx = "androidx.navigation:navigation-fragment-ktx:${Versions.navVersion}"
         const val navUiKtx = "androidx.navigation:navigation-ui-ktx:${Versions.navVersion}"
         const val navDynamic = "androidx.navigation:navigation-dynamic-features-fragment:${Versions.navVersion}"
+
+
+
     }
 
     object DataStoreDependencies {

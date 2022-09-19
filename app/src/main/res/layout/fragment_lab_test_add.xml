@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.suraksha.android.view_model.LabsViewModel" />
+        <variable
+            name="clickHelper"
+            type="com.suraksha.android.view.utility.callbacks.ClickHelper" />
+
+        <variable
+            name="test"
+            type="com.suraksha.cloud.model.response.lab.LabTest" />
+
+    </data>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <LinearLayout
+        style="@style/RootLayout"
+        android:orientation="vertical"
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="0dp">
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_testName"
+            style="@style/text_inputLayout"
+            android:hint="@string/test_name"
+
+
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                style="@style/edit_text"
+                android:text="@={test.testName}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_price"
+            style="@style/text_inputLayout"
+            android:hint="@string/price"
+
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/til_testName"
+           >
+
+            <com.google.android.material.textfield.TextInputEditText
+                style="@style/edit_text"
+                android:text="@={test.testRate}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_duration"
+            style="@style/text_inputLayout"
+            android:hint="@string/duration"
+
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/til_price"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                style="@style/edit_text"
+                android:text="@={test.duration}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_testCode"
+            style="@style/text_inputLayout"
+            android:hint="@string/test_code"
+
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/til_department"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                style="@style/edit_text"
+                android:text="@={test.testCode}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:layout_marginTop="@dimen/margin_16"
+            android:layout_marginStart="@dimen/margin_32"
+            android:layout_marginEnd="@dimen/margin_32"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/confidentiality"
+            android:textColor="@color/primaryTextColor"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_32"
+            android:layout_marginEnd="@dimen/margin_32"
+            android:background="@drawable/edit_text_background"
+            android:orientation="vertical">
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/sp_confidentiality"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:padding="@dimen/margin_16"
+                android:entries="@array/yes_no"/>
+        </LinearLayout>
+        <TextView
+            android:layout_marginTop="@dimen/margin_16"
+            android:layout_marginStart="@dimen/margin_32"
+            android:layout_marginEnd="@dimen/margin_32"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/department"
+            android:textColor="@color/primaryTextColor"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_32"
+            android:layout_marginEnd="@dimen/margin_32"
+            android:background="@drawable/edit_text_background"
+            android:orientation="vertical">
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/sp_departement"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:padding="@dimen/margin_16"
+                android:entries="@array/departments"/>
+        </LinearLayout>
+
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_collectionCenter"
+            style="@style/text_inputLayout"
+            android:hint="@string/collection_center"
+
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/til_confidentiality"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                style="@style/edit_text"
+                android:text="@={test.collectionCenter}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_testDesc"
+            style="@style/text_inputLayout"
+            android:layout_height="150dp"
+
+            android:hint="@string/description"
+
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/til_collectionCenter"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:gravity="top"
+                android:minLines="4"
+                android:maxLines="4"
+                android:text="@={test.testDesc}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btn_submit"
+            style="@style/submit_button"
+            android:layout_marginTop="@dimen/margin_16"
+            android:onClick="@{v-> clickHelper.onClick(v)}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/til_testDesc" />
+      <!--  android:alpha="@{viewModel.isSignInEnabled()?1.0f:0.3f}"
+        android:onClick="@{()-> viewModel.doSignInClick()}"
+        android:text="@{viewModel.buttonText}"-->
+
+    </LinearLayout>
+    </ScrollView>
+
+</layout>

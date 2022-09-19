@@ -20,7 +20,7 @@ object Versions {
     const val mokito = "3.2.0"
     const val androidJunit = "1.1.3"
 
-    const val navVersion = "2.4.1"
+    const val navVersion = "2.5.1"
     const val daggerVersion = "2.41"
     const val lifecycleVersion = "2.4.1"
     const val retrofitVersion = "2.9.0"

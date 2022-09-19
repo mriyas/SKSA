@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/lab_tests_fragment">
+    <fragment
+        android:id="@+id/lab_tests_fragment"
+        android:name="com.suraksha.android.view.fragment.lab.LabTestHomeFragment"
+
+        tools:layout="@layout/fragment_lab_tests_home"/>
+
+    <fragment
+        android:id="@+id/fragment_chat"
+        android:name="com.suraksha.android.view.fragment.dashboard.ChatFragment"
+        android:label="fragment_chat"
+        tools:layout="@layout/fragment_chat" />
+    <fragment
+        android:id="@+id/fragment_settings"
+        android:name="com.suraksha.android.view.fragment.dashboard.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/fragment_profile"
+        android:name="com.suraksha.android.view.fragment.dashboard.SettingsFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+
+</navigation>

@@ -10,5 +10,18 @@
         <item>Sunday</item>
     </string-array>
 
+    <string-array name="yes_no">
+        <item>NO</item>
+        <item>YES</item>
+    </string-array>
+
+    <string-array name="departments">
+        <item> Bio chemistry</item>
+        <item>Hematology</item>
+        <item>Microbiology</item>
+        <item>Virology&amp;immunology</item>
+        <item>Histopathology</item>
+        <item>Cytology</item>
+    </string-array>
 
 </resources>

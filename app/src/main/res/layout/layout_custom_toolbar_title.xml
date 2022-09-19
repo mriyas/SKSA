@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="viewModel"
+            type="com.suraksha.android.view_model.BaseViewModel" />
+    </data>
+    <LinearLayout
+        android:orientation="vertical"
+
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:visibility="@{viewModel.apiError?View.VISIBLE:View.GONE}"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_title"
+            android:textColor="@color/tool_bar_title_color"
+           style="@style/text_title_3"
+            tools:text="Error Message"
+            android:text="TITLE"/>
+        <TextView
+            android:id="@+id/tv_subTitle"
+            style="@style/text_title_4"
+            tools:text="Error Message"
+            android:text=""/>
+    </LinearLayout>
+</layout>

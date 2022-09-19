@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.suraksha.android.view_model.LabsViewModel" />
+        <variable
+            name="clickHelper"
+            type="com.suraksha.android.view.utility.callbacks.ClickHelper" />
+
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout style="@style/RootLayout">
+
+        <include
+            layout="@layout/layout_error"
+            app:viewModel="@{viewModel}" />
+
+        <include
+            layout="@layout/layout_progress"
+            app:viewModel="@{viewModel}" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/text_title_3"
+            android:text="@string/tests"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_create_test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{v->clickHelper.onClick(v)}"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_title"
+            app:srcCompat="@drawable/ic_create_test" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/margin_16"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title"
+            tools:listitem="@layout/rv_lab_tests" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

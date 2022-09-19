@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.suraksha.android.view_model.LabsViewModel" />
+        <variable
+            name="clickHelper"
+            type="com.suraksha.android.view.utility.callbacks.ClickHelper" />
+
+        <variable
+            name="test"
+            type="com.suraksha.cloud.model.response.lab.LabTest" />
+
+    </data>
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+
+                style="@style/RootLayout">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_delete"
+                    android:onClick="@{v->clickHelper.onClick(v)}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_margin="@dimen/margin_16"
+                    app:srcCompat="@drawable/ic_delete"/>
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_edit"
+                    android:onClick="@{v->clickHelper.onClick(v)}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_16"
+                    app:layout_constraintEnd_toStartOf="@+id/iv_delete"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_bxs_edit"/>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_16"
+                    android:elevation="@dimen/margin_16"
+                    android:minHeight="120dp"
+                    app:cardCornerRadius="@dimen/margin_16"
+                    app:cardElevation="@dimen/margin_16"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_delete">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+
+                        style="@style/RootLayout">
+
+                        <TextView
+                            android:id="@+id/tv_testIdLabel"
+                            style="@style/text_title_5"
+                            android:text="@string/test_name"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_testId"
+                            style="@style/text_title_6"
+                            android:layout_width="0dp"
+
+                            android:text="@{'#'+test.testId}"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toLeftOf="@+id/tv_testIdLabel"
+                            app:layout_constraintTop_toBottomOf="@id/tv_testIdLabel"
+                            tools:text="#1234" />
+
+                        <TextView
+                            android:id="@+id/tv_testNameLabel"
+                            style="@style/text_title_5"
+                            android:text="@string/test_name"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toLeftOf="@+id/tv_testName"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@id/tv_testName"
+                            style="@style/text_title_6"
+                            android:layout_width="0dp"
+
+                            android:text="@{test.testName}"
+                            app:layout_constraintLeft_toRightOf="@id/tv_testNameLabel"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/tv_testNameLabel"
+                            tools:text="Text box 2 yyyyyyyyyy" />
+
+                        <TextView
+                            android:id="@+id/tv_durationLabel"
+                            style="@style/text_title_5"
+                            android:layout_marginTop="@dimen/margin_10"
+
+                            android:text="@string/duration"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toLeftOf="@+id/tv_duration"
+                            app:layout_constraintTop_toBottomOf="@id/tv_testName" />
+
+                        <TextView
+                            android:id="@id/tv_duration"
+                            style="@style/text_title_6"
+
+                            android:text="@{test.duration}"
+                            app:layout_constraintLeft_toRightOf="@id/tv_durationLabel"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/tv_durationLabel"
+                            tools:text="Text box 2 yyyyyyyyyy" />
+
+                        <TextView
+                            android:id="@+id/tv_descLabel"
+                            style="@style/text_title_5"
+                            android:layout_marginTop="@dimen/margin_10"
+
+                            android:text="@string/desc"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toLeftOf="@+id/tv_duration"
+                            app:layout_constraintTop_toBottomOf="@id/tv_duration" />
+
+                        <TextView
+                            android:id="@+id/tv_desc"
+                            style="@style/text_title_6"
+
+                            android:text="@{test.testDesc}"
+                            app:layout_constraintLeft_toRightOf="@id/tv_descLabel"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/tv_descLabel"
+                            tools:text="Text box 2 yyyyyyyyyy" />
+
+                        <TextView
+                            android:id="@+id/tv_priceLabel"
+                            style="@style/text_title_5"
+                            android:layout_marginTop="@dimen/margin_10"
+
+                            android:text="@string/price"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toLeftOf="@+id/tv_desc"
+                            app:layout_constraintTop_toBottomOf="@id/tv_desc" />
+
+                        <TextView
+                            android:id="@+id/tv_price"
+                            style="@style/text_title_6"
+
+                            android:text="@{test.testRate}"
+                            app:layout_constraintLeft_toRightOf="@id/tv_priceLabel"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/tv_priceLabel"
+                            tools:text="150 INR" />
+
+                        <TextView
+                            android:id="@+id/tv_prescRequiredLabel"
+                            style="@style/text_title_5"
+                            android:layout_marginTop="@dimen/margin_10"
+
+                            android:text="@string/prescription_required"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toLeftOf="@+id/tv_price"
+                            app:layout_constraintTop_toBottomOf="@id/tv_price" />
+
+                        <TextView
+                            android:id="@+id/tv_prescRequired"
+                            style="@style/text_title_6"
+
+                            android:text="@{test.prescriptionRequired }"
+                            app:layout_constraintLeft_toRightOf="@id/tv_prescRequiredLabel"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/tv_prescRequiredLabel"
+                            tools:text="YES" />
+
+                        <TextView
+                            android:id="@+id/tv_confidentialityLabel"
+                            style="@style/text_title_5"
+                            android:layout_marginTop="@dimen/margin_10"
+
+                            android:text="@string/confidentiality"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toLeftOf="@+id/tv_prescRequired"
+                            app:layout_constraintTop_toBottomOf="@id/tv_prescRequiredLabel" />
+
+                        <TextView
+                            android:id="@+id/tv_confidentiality"
+                            style="@style/text_title_6"
+
+                            android:text="@{test.getConfidentialityText()}"
+                            app:layout_constraintLeft_toRightOf="@id/tv_confidentialityLabel"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/tv_confidentialityLabel"
+                            tools:text="Confidentiality" />
+
+                        <TextView
+                            android:id="@+id/tv_collectionCenterLabel"
+                            style="@style/text_title_5"
+                            android:layout_marginTop="@dimen/margin_10"
+
+                            android:text="@string/collection_center"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toLeftOf="@+id/tv_confidentiality"
+                            app:layout_constraintTop_toBottomOf="@id/tv_confidentiality" />
+
+                        <TextView
+                            android:id="@+id/tv_collectionCenter"
+                            style="@style/text_title_6"
+
+                            android:text="@{test.collectionCenter}"
+                            app:layout_constraintLeft_toRightOf="@id/tv_collectionCenterLabel"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/tv_collectionCenterLabel"
+                            tools:text="Collection Center" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+</layout>

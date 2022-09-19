@@ -2,6 +2,7 @@ package com.suraksha.cloud
 
 import android.content.Context
 import com.google.gson.GsonBuilder
+import com.suraksha.cloud.services.LabsApiService
 import com.suraksha.cloud.services.UserApiService
 import dagger.Module
 import dagger.Provides
@@ -21,7 +22,7 @@ import java.util.concurrent.TimeUnit
 @Suppress("unused")
 @InstallIn(SingletonComponent::class)
 class NetworkModule {
-    private val BASE_URL = "http://dev.scando.world:8080"
+    private val BASE_URL = "https://qa.healthbus.in/"
 
     @Provides
     fun provideRetrofit(client: OkHttpClient): Retrofit {
@@ -49,7 +50,8 @@ class NetworkModule {
         okHttpClientBuilder.addInterceptor(headerInterceptor)
         okHttpClientBuilder.addInterceptor(
             AuthInterceptor(
-                CloudConnector.connectorInterface?.getToken() ?: ""
+                CloudConnector.connectorInterface?.getToken() ?: "",
+                CloudConnector.connectorInterface?.getAppId() ?: 0
             )
         )
         okHttpClientBuilder.addInterceptor(HttpLoggingInterceptor().apply {
@@ -80,6 +82,8 @@ class NetworkModule {
     fun provideUserApiService(retrofit: Retrofit): UserApiService =
         retrofit.create(UserApiService::class.java)
 
-
+    @Provides
+    fun provideLabsApiService(retrofit: Retrofit): LabsApiService =
+        retrofit.create(LabsApiService::class.java)
 
 }

@@ -2,17 +2,17 @@ package com.suraksha.android.view_model
 
 import android.app.Application
 import android.content.Context
+import android.view.inputmethod.InputMethodManager
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.suraksha.android.database.datastore.DataStoreManager
 import com.suraksha.android.model.error.UserErrors
+import com.suraksha.cloud.ApiState
 import com.suraksha.cloud.model.response.AppRegistrationResponse
-import com.suraksha.cloud.model.response.auth.UserDataResponse
-import com.suraksha.cloud.model.response.auth.UserType
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
+import com.suraksha.cloud.model.response.auth.SurakshaUser
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
@@ -21,12 +21,12 @@ import kotlinx.coroutines.runBlocking
  */
 open class BaseViewModel(application: Application) : AndroidViewModel(application) {
     open var mContext: Context? = null
-    var mDataStoreManager: DataStoreManager? = null
+    lateinit var mDataStoreManager: DataStoreManager
     val isLoggedOut= MutableLiveData<Boolean>(false)
     val errorModel= UserErrors(null)
 
     val TAG=javaClass.simpleName
-
+    val apiState = MutableStateFlow(ApiState<Any>(ApiState.Status.IDLE))
     init {
         mContext = application
         mDataStoreManager = DataStoreManager(application)
@@ -46,8 +46,8 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
         }
     }
 
-    fun getAppid(): Flow<Int?>? {
-        return mDataStoreManager?.getAppId
+    fun getAppid(): Flow<Int?> {
+        return mDataStoreManager.getAppId
 
     }
 
@@ -63,33 +63,18 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
 
     }
 
-    fun saveUserData(response: UserDataResponse){
+    fun saveUserData(response: SurakshaUser){
         viewModelScope.launch() {
             mDataStoreManager?.saveUserData(response)
         }
     }
 
-    fun getUserData(): Flow<UserDataResponse?>? {
+    fun getUserData(): Flow<SurakshaUser?>? {
         return mDataStoreManager?.getUserData()
     }
 
 
-    fun getUserType():Int
-    {
-        var userType = UserType.NOT_DEFINED
-        runBlocking {
-            viewModelScope.launch {
-                getUserData()?.catch { e ->
-                    e.printStackTrace()
-                }?.collect {
-                    userType = it?.userType?:UserType.NOT_DEFINED
-                }
-            }
-        }
-        if(userType==UserType.NOT_DEFINED)
-            logout()
-        return userType
-    }
+
 
     fun getToken(): String? {
         var token = null as String?
@@ -108,7 +93,7 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
 
     }
 
-    fun getRefreshToken(): String? {
+  /*  fun getRefreshToken(): String? {
         var refreshToken = null as String?
         runBlocking {
             viewModelScope.launch {
@@ -123,16 +108,16 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
               logout()
         return refreshToken
     }
+*/
 
-
-    fun getUserId(): Long? {
-        var userId = 0L as Long?
+    fun getLoggedInUserId(): Long {
+        var userId = 0L
         runBlocking {
             viewModelScope.launch {
                 getUserData()?.catch { e ->
                     e.printStackTrace()
                 }?.collect {
-                    userId = it?.userId
+                    userId = it?.userId?:0
                 }
             }
         }
@@ -140,39 +125,25 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
 
     }
 
-    fun getUserName(): String? {
-        var userName= null as String?
-        runBlocking {
-            viewModelScope.launch {
-                getUserData()?.catch { e ->
-                    e.printStackTrace()
-                }?.collect {
-                    userName = it?.userName
-                }
-            }
-        }
-        return userName
 
-    }
-    fun getUserProfileUrl(): String? {
-        var userprofileUrl= null as String?
-        runBlocking {
-            viewModelScope.launch {
-                getUserData()?.catch { e ->
-                    e.printStackTrace()
-                }?.collect {
-                    userprofileUrl = it?.profileUrl
-                }
-            }
+    fun getAppId(): Int {
+        var appId = 0
+        runBlocking(Dispatchers.IO) {
+            appId = getAppid()?.first()?.toInt() ?: 0
         }
-        return userprofileUrl
+
+        return appId
 
     }
 
 
+    fun isApiCallInProgress(): Boolean {
+        return apiState.value.status == ApiState.Status.LOADING
+    }
 
-
-
+    fun isApiError(): Boolean {
+        return apiState.value.status == ApiState.Status.ERROR
+    }
 
 
 

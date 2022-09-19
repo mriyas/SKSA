@@ -13,7 +13,10 @@ import android.provider.Settings
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import android.widget.Toast.makeText
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -26,6 +29,9 @@ import com.suraksha.android.view.activity.SurakshaLaunchActivity
 import com.suraksha.android.view.utility.callbacks.ClickHelper
 import com.suraksha.android.view_model.BaseViewModel
 import com.suraksha.app.BuildConfig
+import com.suraksha.app.R
+import kotlinx.android.synthetic.main.fragment_login.*
+import kotlinx.android.synthetic.main.layout_custom_toolbar_title.view.*
 
 
 abstract class BaseFragment : Fragment(), ClickHelper {
@@ -69,11 +75,7 @@ abstract class BaseFragment : Fragment(), ClickHelper {
 
     }
 
-    fun showToast(msg: String?) {
-        activity?.runOnUiThread(Runnable {
-            Toast.makeText(activity, msg, Toast.LENGTH_SHORT).show()
-        })
-    }
+
 
     open fun setToolBar(toolbar: Toolbar, isMenuRequired: Boolean, isFromFragment: Int) {
         if (isMenuRequired) {
@@ -89,13 +91,28 @@ abstract class BaseFragment : Fragment(), ClickHelper {
     }
 
 
-    open fun hideKeyboard() {
-        val v = activity?.window?.currentFocus
-        if (v != null) {
-            val imm: InputMethodManager =
-                activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(v.windowToken, 0)
+    fun setActionBar(title:String?=getString(R.string.app_name),setIcon:Boolean=false){
+        val actionBar: ActionBar = (activity as AppCompatActivity).supportActionBar!!
+        actionBar.apply {
+            val view=layoutInflater.inflate(R.layout.layout_custom_toolbar_title,null)
+            customView=view
+            displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
+            view.tv_title.text=title
+            view.tv_subTitle.text="Labs"
+            setDisplayShowTitleEnabled(false)
+            setHomeButtonEnabled(true)
+            setDisplayHomeAsUpEnabled(true)
+
+            if(setIcon) {
+
+                // setNavigationIcon(R.drawable.ic_home_drawer);
+                setHomeAsUpIndicator(R.drawable.ic_home_drawer)
+            }else{
+                setHomeAsUpIndicator(R.drawable.ic_back)
+
+            }
         }
+
     }
 
 
@@ -126,7 +143,7 @@ abstract class BaseFragment : Fragment(), ClickHelper {
         findNavController().popBackStack()
     }
 
-    fun showMessage(msg: String) {
+    fun showSnackBar(msg: String) {
         val snackbar = Snackbar.make(
             requireActivity().findViewById(android.R.id.content),
             msg,
@@ -134,7 +151,9 @@ abstract class BaseFragment : Fragment(), ClickHelper {
         )
         snackbar.show()
     }
-
+    fun showSnackBarError(msg: String?) {
+        showSnackBar(msg?:getString(com.suraksha.app.R.string.something_wrong))
+    }
     fun showMessageOKCancel(
         message: String?,
         okListener: DialogInterface.OnClickListener?,
@@ -262,4 +281,9 @@ abstract class BaseFragment : Fragment(), ClickHelper {
         }
     }
 
+
+    fun Fragment.hideKeyboard() {
+        val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(requireView().windowToken, 0)
+    }
 }

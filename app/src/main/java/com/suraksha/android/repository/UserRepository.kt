@@ -1,15 +1,15 @@
 package com.suraksha.android.repository
 
-import com.suraksha.cloud.Resource
+import com.suraksha.cloud.ApiState
 import com.suraksha.cloud.datasource.UserDataSource
 import com.suraksha.cloud.model.request.AppRegistrationRequest
-import com.suraksha.cloud.model.request.CheckAccountRequest
+import com.suraksha.cloud.model.request.LoginRequest
 import com.suraksha.cloud.model.request.OtpGenerationRequest
 import com.suraksha.cloud.model.request.OtpValidateRequest
 import com.suraksha.cloud.model.response.AppRegistrationResponse
 import com.suraksha.cloud.model.response.auth.OtpGenerateResponse
 import com.suraksha.cloud.model.response.auth.OtpVerifyResponse
-import com.suraksha.cloud.model.response.ResponseData
+import com.suraksha.cloud.model.response.auth.SurakshaUser
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -18,14 +18,14 @@ import javax.inject.Inject
 
 class UserRepository@Inject constructor(private val userDataSource: UserDataSource) {
 
-    suspend fun registerApp(request: AppRegistrationRequest): Flow<Resource<AppRegistrationResponse>> {
+    suspend fun registerApp(request: AppRegistrationRequest): Flow<ApiState<AppRegistrationResponse>> {
 
         return flow {
-            emit(Resource.loading())
+            emit(ApiState.loading())
             val result = userDataSource.registerApp(request)
 
             //Cache to database if response is successful
-            if (result.status == Resource.Status.SUCCESS) {
+            if (result.status == ApiState.Status.SUCCESS) {
                 //do db operations
             }
             emit(result)
@@ -33,29 +33,25 @@ class UserRepository@Inject constructor(private val userDataSource: UserDataSour
     }
 
 
-    suspend fun checkAccount(request: CheckAccountRequest): Flow<Resource<ResponseData>> {
+    suspend fun login(request: LoginRequest): Flow<ApiState<SurakshaUser>> {
 
         return flow {
-            emit(Resource.loading())
-            val result = userDataSource.checkAccount(request)
+            emit(ApiState.loading())
+            val result = userDataSource.login(request)
 
-            //Cache to database if response is successful
-            if (result.status == Resource.Status.SUCCESS) {
-                //do db operations
-            }
             emit(result)
         }.flowOn(Dispatchers.IO)
     }
 
 
-    suspend fun generateOtp(request: OtpGenerationRequest): Flow<Resource<OtpGenerateResponse>> {
+    suspend fun generateOtp(request: OtpGenerationRequest): Flow<ApiState<OtpGenerateResponse>> {
 
         return flow {
-            emit(Resource.loading())
+            emit(ApiState.loading())
             val result = userDataSource.generateOtp(request)
 
             //Cache to database if response is successful
-            if (result.status == Resource.Status.SUCCESS) {
+            if (result.status == ApiState.Status.SUCCESS) {
                 //do db operations
             }
             emit(result)
@@ -63,14 +59,14 @@ class UserRepository@Inject constructor(private val userDataSource: UserDataSour
     }
 
 
-    suspend fun verifyOtp(request: OtpValidateRequest): Flow<Resource<OtpVerifyResponse>> {
+    suspend fun verifyOtp(request: OtpValidateRequest): Flow<ApiState<OtpVerifyResponse>> {
 
         return flow {
-            emit(Resource.loading())
+            emit(ApiState.loading())
             val result = userDataSource.verifyOtp(request)
 
             //Cache to database if response is successful
-            if (result.status == Resource.Status.SUCCESS) {
+            if (result.status == ApiState.Status.SUCCESS) {
                 //do db operations
             }
             emit(result)

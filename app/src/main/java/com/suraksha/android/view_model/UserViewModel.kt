@@ -1,24 +1,20 @@
 package com.suraksha.android.view_model
 
-import android.content.Context
-import android.util.Log
+import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.suraksha.android.SurakshaApplication
-import com.suraksha.android.repository.UserRepository
-import com.suraksha.android.view.utility.Validator
-import com.suraksha.android.model.SurakshaUser
 import com.suraksha.android.model.error.UserErrors
-import com.suraksha.android.model.UserLiveData
-import com.suraksha.cloud.Resource
-import com.suraksha.cloud.model.request.CheckAccountRequest
-import com.suraksha.cloud.model.request.OtpGenerationRequest
-import com.suraksha.cloud.model.request.OtpValidateRequest
-import com.suraksha.cloud.model.response.auth.OtpVerifyResponse
+import com.suraksha.android.repository.UserRepository
+import com.suraksha.app.R
+import com.suraksha.cloud.ApiState
+import com.suraksha.cloud.model.APIError
+import com.suraksha.cloud.model.request.LoginRequest
+import com.suraksha.cloud.model.response.AppRegistrationResponse
+import com.suraksha.cloud.model.response.auth.SurakshaUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -32,58 +28,169 @@ class UserViewModel @Inject constructor(
     private val application: SurakshaApplication,
     private val userRepository: UserRepository
 ) : BaseViewModel(application) {
-    val mUser = MutableLiveData<SurakshaUser>()
 
+    private var _mUser = MutableLiveData(SurakshaUser())
+
+    //  val mUser: LiveData<SurakshaUser> get() = _mUser
+ 
+    val isSignInEnabled = ObservableBoolean(false)
+    var buttonText = MutableLiveData<String>()
+
+    var password: String = ""
+        set(value) {
+            field = value
+            _mUser.value?.password = field
+            isSignInEnabled.set(isValidUser())
+            //  setErrorMessage(null)
+        }
 
     init {
-        initUser()
+
+        doForgotPasswordClick()
+        buttonText.value=application.getString(R.string.sign_in)
     }
 
-    private fun initUser(user:SurakshaUser?=null) {
-        mUser.value = user ?: SurakshaUser()
+
+    private fun isValidUser(): Boolean {
+
+        val user = _mUser?.value
+        if (user?.email?.trim().isNullOrEmpty()) {
+            buttonText.postValue(application.getString(R.string.invalid_email))
+            return false
+        }
+        if (user?.password?.trim().isNullOrEmpty()) {
+            buttonText.postValue(application.getString(R.string.invalid_password))
+            buttonText.value=(application.getString(R.string.invalid_password))
+            return false
+        }
+        buttonText.postValue(application.getString(R.string.sign_in))
+        return true
     }
 
+    var email: String = ""
+        set(value) {
+            field = value
+            _mUser.value?.email = field
+            isSignInEnabled.set(isValidUser())
+            //setErrorMessage(null)
+        }
 
-    fun checkAccount(countryCode: String, errorModel: UserErrors) {
+
+    private fun doLogin() {
         if (true) {//todo need validation
-        //    mobileNumber = countryCode + mobileNumberWithoutCode.value
-            val request = CheckAccountRequest()
-            val appId: Int?
-            runBlocking(Dispatchers.IO) {
-                appId = getAppid()?.first()?.toInt()
-            }
-            request.number = mUser.value?.phoneNumber.toString()
-            if (appId != null) {
-                request.appId = appId
-            }
-            viewModelScope.launch {
-                userRepository.checkAccount(request).collect {
+            //    mobileNumber = countryCode + mobileNumberWithoutCode.value
+            val appId = getAppId()
 
-                    when (it.status) {
-                        Resource.Status.SUCCESS -> {
-                        //    errorModel.uiUpdate = false
-                          //  userLiveData?.postCheckAccountSuccess()
-                            Log.i("App reg", "Success")
-                        }
-                        Resource.Status.ERROR -> {
-                          //  errorModel.uiUpdate = false
-                          //  userLiveData?.postCheckAccountFailed()
-                            Log.i("App reg", "Error")
-                        }
-                        Resource.Status.LOADING -> {
-                          //  errorModel.uiUpdate = true
-                            Log.i("App reg", "Loading")
-                        }
+
+            if (appId <= 0) {
+
+                doAppRegistration()
+
+                return
+            }
+            val request = LoginRequest()
+            request.userEmail=email
+            request.userPassword=password
+            request.userType=3
+            request.appId=appId
+
+
+            viewModelScope.launch {
+
+                userRepository.login(request)
+
+                    .catch {
+                         apiState.value =
+                            ApiState.error(APIError(-1, it.localizedMessage))
                     }
 
+                    .collect {
 
+                        when (it.status) {
+                            ApiState.Status.SUCCESS -> {
+
+                                if(it.data is SurakshaUser) {
+                                    val user=it.data as SurakshaUser
+                                    _mUser.value = user
+                                    saveUserData(user)
+                                    apiState.value = ApiState.success(_mUser)
+                                }
+
+                            }
+                            ApiState.Status.ERROR -> {
+                                 apiState.value =
+                                    ApiState.error(it.error)
+                            }
+                            ApiState.Status.LOADING -> {
+                                //  errorModel.uiUpdate = true
+                                 apiState.value = ApiState.loading()
+                            }
+                            ApiState.Status.IDLE -> {
+                                 apiState.value = ApiState.idle()
+
+                            }
+                        }
+                    }
+            }
+
+
+        } else {
+            //      userLiveData?.postMobileValidationFailed()
+        }
+    }
+
+    private fun doAppRegistration() {
+        viewModelScope.launch {
+               val appRegisterViewModel = AppRegisterViewModel(application, userRepository)
+            appRegisterViewModel.registerApp()
+
+            appRegisterViewModel. apiState.collect {
+                when (it.status) {
+                    ApiState.Status.SUCCESS -> {
+
+                        val appId = if(it?.data is AppRegistrationResponse) {
+                            (it?.data as AppRegistrationResponse)?.appId as Int
+                        } else 0
+
+                        if (appId <= 0) {
+                             apiState.value =
+                                ApiState.error(APIError(-100, "App registration failed"))
+                        } else {
+
+                            doLogin()
+                        }
+
+                    }
+                    ApiState.Status.ERROR -> {
+                         apiState.value =
+                            ApiState.error(it.error)
+                    }
+                    ApiState.Status.LOADING -> {
+                        //  errorModel.uiUpdate = true
+                         apiState.value = ApiState.loading()
+                    }
+                    ApiState.Status.IDLE -> {
+                         apiState.value = ApiState.idle()
+
+                    }
                 }
             }
 
-        } else {
-      //      userLiveData?.postMobileValidationFailed()
+
         }
     }
+
+    fun isUserLoggedIn(): Boolean {
+        var user:SurakshaUser?=null
+        runBlocking(Dispatchers.IO) {
+            user = getUserData()?.first()
+        }
+        var userId=user?.userId?:0
+
+        return userId>0
+    }
+
+
 
     fun generateOtp(errorModel: UserErrors?) {
 
@@ -93,68 +200,42 @@ class UserViewModel @Inject constructor(
 
     }
 
-    private fun checkAlreadyRegisteredUser(
-        it: Resource<OtpVerifyResponse>,
-        errorModel: UserErrors
-    ) {
-        if (!it.data?.token.isNullOrEmpty()) {
-            // existing user
-                runBlocking {
-// save user data
-                    it.data?.let { it1 -> saveUserData(it1) }
 
-// for getting userdata
-                    viewModelScope.launch {
-                        getUserData()?.catch { e ->
-                            e.printStackTrace()
-                        }?.collect {
-                            val userId = it?.userId
-                            val userType = it?.userType
-                            val token = it?.token
-                        }
-                    }
-                }
+    fun doSignUp() {
 
+    }
 
+    fun doFacebookSignup() {
 
+    }
 
-        } else {
+    fun doGoogleSignUp() {
 
-        }
+    }
+
+    fun doFacebookLogin() {
+
+    }
+
+    fun doGoogleLogin() {
+
+    }
+
+    fun doForgotPasswordClick() {
+
+        email="aswathysh64@gmail.com"
+        password="Qwe@12345"
+    }
+
+    fun doSignInClick() {
+
+        doLogin()
+    }
+
+    fun doSignUpClick() {
 
     }
 
 
-
-    fun doSignUp(){
-
-    }
-    fun doFacebookSignup(){
-
-    }
-
-    fun doGoogleSignUp(){
-
-    }
-
-    fun doFacebookLogin(){
-
-    }
-
-    fun doGoogleLogin(){
-
-    }
-
-    fun doForgotPasswordClick(){
-
-    }
-
-    fun doSignInClick(){
-
-    }
-
-    fun doSignUpClick(){
-
-    }
 
 }

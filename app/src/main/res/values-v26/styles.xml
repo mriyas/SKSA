@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="text_inputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_marginHorizontal">@dimen/margin_32</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:layout_marginTop">@dimen/margin_16</item>
+        <item name="boxStrokeColor">@color/text_input_box_stroke</item>
+        <item name="hintTextAppearance">@style/TextFloatLabelAppearance</item>
+        <item name="android:textColorHint">@color/text_input_box_stroke</item>
+        <item name="hintTextColor">@color/text_input_box_stroke </item>
+    </style>
+
+    <style name="TextFloatLabelAppearance" parent="TextAppearance.Design.Hint">
+        <!-- Floating label appearance here -->
+        <item name="android:textColor">@color/text_input_box_stroke</item>
+    </style>
+</resources>

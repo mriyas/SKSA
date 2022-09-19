@@ -3,12 +3,20 @@ package com.suraksha.cloud.model.response
 import com.google.gson.annotations.SerializedName
 
 open class BaseResponse<T> {
-    @SerializedName("status")
+    @SerializedName("Response")
+    var response: Response<T>? = null
+
+}
+
+open class Response<T> {
+    @SerializedName("Status")
     var status: ResponseStatus? = null
-    @SerializedName("data")
+    @SerializedName("Data")
     var data: T? = null
     @SerializedName("version")
     var currentVersion: String? = null
+
+
 
     fun isValidResponse() : Boolean{
         var isValid  = false;

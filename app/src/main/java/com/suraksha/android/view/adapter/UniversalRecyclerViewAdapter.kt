@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.suraksha.android.view.utility.callbacks.ClickHelper
 import com.suraksha.app.BR
 import com.suraksha.app.R
+import com.suraksha.cloud.model.response.lab.LabTest
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -94,10 +95,10 @@ class UniversalRecyclerViewAdapter<T>(
             clickHelper: ClickHelper?,
             parentData: Any?
         ) {
-           /* binding.setVariable(BR.data, item)
-            binding.setVariable(BR.fr, fr)
+            binding.setVariable(BR.data, item)
             binding.setVariable(BR.clickHelper, clickHelper)
-            binding.setVariable(BR.parentData,parentData)*/
+            /* binding.setVariable(BR.fr, fr)
+                       binding.setVariable(BR.parentData,parentData)*/
 
 
             binding.executePendingBindings()
@@ -124,10 +125,18 @@ class UniversalRecyclerViewAdapter<T>(
                 if (constraint.isNullOrBlank()) {
                     searchableList?.addAll(items!!)
                 } else {
-                    val filterPattern = constraint.toString().toLowerCase().trim { it <= ' ' }
+                    val filterPattern = constraint.toString().lowercase(Locale.ROOT).trim { it <= ' ' }
                     for (item in 0..items?.size!!) {
                         val it = items?.get(item)
                        //TOOD: Do filter logic
+
+                        if(it is LabTest){
+                            if(it.testDesc.contains(filterPattern,false)
+                                ||it.testId.contains(filterPattern,false)
+                                ||it.testName.contains(filterPattern,false)){
+                                searchableList?.add(it)
+                            }
+                        }
 
                     }
 

@@ -12,6 +12,7 @@ plugins {
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
     id("kotlin-android-extensions")
+    id("androidx.navigation.safeargs")
 
 
 }
@@ -23,7 +24,7 @@ android {
         minSdk = Versions.minSdk
         targetSdk = Versions.targetSdk
         versionCode = 1
-        versionName = "1.0"
+        versionName = "0.0.001-test"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -59,6 +60,8 @@ dependencies {
     implementation(AppDependencies.dataStoreLibraries)
     implementation(AppDependencies.retrofitCloudLibraries)
     implementation(project(mapOf("path" to ":cloud")))
+    implementation("androidx.navigation:navigation-fragment-ktx:2.5.2")
+    implementation("androidx.navigation:navigation-ui-ktx:2.5.2")
     testImplementation(AppDependencies.testLibraries)
     androidTestImplementation(AppDependencies.androidTestLibraries)
     hiltDependency()

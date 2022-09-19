@@ -90,6 +90,13 @@
         <item name="android:textColor">@android:color/white</item>
     </style>
 
+    <style name="RootLayout">
+        <item name="android:padding">16dp</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
     <style name="Text">
         <item name="android:textColor">@color/white</item>
     </style>
@@ -266,14 +273,27 @@
     </style>
 
     <style name="text_inputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-        <item name="android:textColorHint">@color/text_black_5</item>
-        <item name="android:layout_width">@dimen/margin_0</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_marginStart">@dimen/margin_32</item>
+        <item name="android:layout_marginEnd">@dimen/margin_32</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:maxLines">1</item>
         <item name="android:layout_marginTop">@dimen/margin_16</item>
+        <item name="boxStrokeColor">@color/text_input_box_stroke</item>
+        <item name="hintTextAppearance">@style/TextFloatLabelAppearance</item>
+        <item name="android:textColorHint">@color/text_input_box_stroke</item>
+        <item name="hintTextColor">@color/text_input_box_stroke </item>
     </style>
+
+    <style name="TextFloatLabelAppearance" parent="TextAppearance.Design.Hint">
+        <!-- Floating label appearance here -->
+        <item name="android:textColor">@color/text_input_box_stroke</item>
+    </style>
+
     <style name="edit_text" parent="Widget.AppCompat.EditText">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">40dp</item>
+        <item name="android:maxLines">1</item>
         <item name="android:gravity">center|start</item>
         <item name="android:padding">1dp</item>
         <item name="android:textSize">13sp</item>
@@ -282,6 +302,51 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/text_size_14</item>
+
+    </style>
+   <!-- android:layout_width="match_parent"
+    android:layout_height=""
+    android:="@color/white"
+    =""
+    app:="@style/ThemeOverlay.AppCompat.Light"-->
+    <style name="text_title_3" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/text_size_18</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textAllCaps">true</item>
+
+    </style>
+    <style name="text_title_5" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/text_size_18</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/black</item>
+
+    </style>
+    <style name="text_title_6" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/text_size_18</item>
+        <item name="android:textColor">@color/black</item>
+
+    </style>
+    <style name="ToolbarTheme" parent="Widget.AppCompat.Toolbar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:background">@color/white</item>
+        <item name="theme">@style/ThemeOverlay.AppCompat.Light</item>
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+
+
+    </style>
+    <style name="text_title_4" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/text_size_18</item>
+        <item name="android:textColor">@color/black</item>
 
     </style>
     <style name="button2" parent="Widget.MaterialComponents.Button.OutlinedButton">
@@ -295,6 +360,7 @@
         <item name="iconTintMode">multiply</item>
         <item name="android:textSize">13sp</item>
         <item name="android:textAllCaps">false</item>
+
     </style>
     <style name="text_view_style" parent="Widget.AppCompat.TextView">
         <item name="android:layout_width">wrap_content</item>
@@ -312,7 +378,7 @@
         <item name="android:layout_width">177dp</item>
         <item name="android:insetTop">0dp</item>
         <item name="android:insetBottom">0dp</item>
-        <item name="android:backgroundTint">@color/red</item>
+        <item name="android:backgroundTint">@color/primaryButtonColor</item>
         <item name="android:text">@string/submit</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textAllCaps">false</item>

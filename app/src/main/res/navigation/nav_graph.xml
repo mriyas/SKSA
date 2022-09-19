@@ -1,31 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_graph"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id/userMobileInputFragment">
+    app:startDestination="@id/loginFragment">
+
 
     <fragment
-        android:id="@+id/userMobileInputFragment"
-        android:name="com.suraksha.android.view.fragment.DashboardHomeFragment"
-        tools:layout="@layout/fragment_dashboard_home">
-        <!--<action
-            android:id="@+id/action_show_mobile_otp_verification"
-            app:destination="@id/userMobileOtpVerification"
-           />-->
+        android:id="@+id/loginFragment"
+        android:name="com.suraksha.android.view.fragment.LoginFragment"
+        android:label="loginFragment"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/goToLabsHomeScreen"
+            app:destination="@id/labsHomeFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
     </fragment>
 
-  <!--  <fragment
-        android:id="@+id/userMobileOtpVerification"
-        android:name="YOUE FRAGMENT CLASS"
-        tools:layout="YOUR FRAGMENT LAYOUT">
-        <action
-            android:id="@+id/action_show_user_types"
-            app:destination="@id/userTypesFragment"
-            />
+    <fragment
+        android:id="@+id/labsHomeFragment"
+        android:name="com.suraksha.android.view.fragment.lab.LabHomeFragment"
+        android:label="labsHomeFragment"
+        tools:layout="@layout/fragment_lab_home">
 
 
-    </fragment>-->
-
+    </fragment>
 
 </navigation>

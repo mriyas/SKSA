@@ -2,133 +2,125 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="viewModel"
             type="com.suraksha.android.view_model.UserViewModel" />
     </data>
-    
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        style="@style/RootLayout"
+
         android:background="@color/white">
-        <com.google.android.material.appbar.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/text_title_3"
+            android:text="@string/login"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:id="@+id/app_bar">
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/materialToolbar"
-            style="@style/toolbar_style">
+            app:layout_constraintTop_toTopOf="parent" />
 
-        </com.google.android.material.appbar.MaterialToolbar>
-        </com.google.android.material.appbar.AppBarLayout>
+        <ImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title"
+            app:srcCompat="@drawable/image_removebg_preview__3__1_1_" />
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edittext7"
+            style="@style/text_inputLayout"
+            android:hint="@string/email_or_ph"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_logo"
+            app:startIconDrawable="@drawable/email_at">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/edittext7"
-        style="@style/text_inputLayout"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="50dp"
-        android:hint="@string/email_or_ph"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:startIconDrawable="@drawable/email_at">
+            <com.google.android.material.textfield.TextInputEditText
+                style="@style/edit_text"
+                android:text="@={viewModel.email}" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:text="@{viewModel.mUser.email}"
-            style="@style/edit_text"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
-    </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edittext8"
+            style="@style/text_inputLayout"
+            android:hint="@string/password"
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/edittext8"
-        style="@style/text_inputLayout"
-        android:hint="@string/password"
-        app:layout_constraintEnd_toEndOf="@+id/edittext7"
-        app:layout_constraintStart_toStartOf="@+id/edittext7"
-        app:layout_constraintTop_toBottomOf="@+id/edittext7"
-        app:startIconDrawable="@drawable/lock"
+            app:layout_constraintEnd_toEndOf="parent"
 
-        >
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edittext7"
+            app:startIconDrawable="@drawable/lock">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:text="@{viewModel.mUser.password}"
-            style="@style/edit_text" />
+            <com.google.android.material.textfield.TextInputEditText
+                style="@style/edit_text"
+                android:text="@={viewModel.password}" />
 
-    </com.google.android.material.textfield.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/outlinedButton"
             style="@style/button2"
+            android:onClick="@{()-> viewModel.doFacebookLogin()}"
             android:text="@string/login_with_facebook"
             android:textColor="@color/text_black_5"
             app:icon="@drawable/facebook_logo"
             app:layout_constraintEnd_toEndOf="@+id/outlinedButton2"
             app:layout_constraintStart_toStartOf="@+id/outlinedButton2"
-            app:layout_constraintTop_toBottomOf="@+id/outlinedButton2"
-            android:onClick="@{()-> viewModel.doFacebookLogin()}" />
+            app:layout_constraintTop_toBottomOf="@+id/outlinedButton2" />
 
-    <Button
-        android:id="@+id/outlinedButton2"
-        style="@style/button2"
-        android:text="@string/login_with_google"
-        android:textColor="@color/text_black_5"
-        app:icon="@drawable/ic_flat_color_icons_google"
-        app:layout_constraintEnd_toEndOf="@+id/view2"
-        app:layout_constraintStart_toStartOf="@+id/view"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        android:onClick="@{()-> viewModel.doGoogleLogin()}"/>
+        <Button
+            android:id="@+id/outlinedButton2"
+            style="@style/button2"
+            android:onClick="@{()-> viewModel.doGoogleLogin()}"
+            android:text="@string/login_with_google"
+            android:textColor="@color/text_black_5"
+            app:icon="@drawable/ic_flat_color_icons_google"
+            app:layout_constraintEnd_toEndOf="@+id/view2"
+            app:layout_constraintStart_toStartOf="@+id/view"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-    <View
-        android:id="@+id/view"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginEnd="16dp"
-        android:background="@color/color_drawer"
-        app:layout_constraintBottom_toBottomOf="@+id/textView4"
-        app:layout_constraintEnd_toStartOf="@+id/textView4"
-        app:layout_constraintStart_toStartOf="@+id/edittext8"
-        app:layout_constraintTop_toTopOf="@+id/textView4" />
+        <View
+            android:id="@+id/view"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/color_drawer"
+            app:layout_constraintBottom_toBottomOf="@+id/textView4"
+            app:layout_constraintEnd_toStartOf="@+id/textView4"
+            app:layout_constraintStart_toStartOf="@+id/edittext8"
+            app:layout_constraintTop_toTopOf="@+id/textView4" />
 
-    <View
-        android:id="@+id/view2"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginStart="16dp"
-        android:background="@color/color_drawer"
-        app:layout_constraintBottom_toBottomOf="@+id/textView4"
-        app:layout_constraintEnd_toEndOf="@+id/edittext8"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintTop_toTopOf="@+id/textView4" />
-
-    <TextView
-        android:id="@+id/textView4"
-        style="@style/text_view_dimention"
-        android:layout_marginTop="24dp"
-        android:text="@string/or"
-        android:textColor="@color/text_black_5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="116dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/app_bar"
-            app:srcCompat="@drawable/image_removebg_preview__3__1_1_" />
+        <View
+            android:id="@+id/view2"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="16dp"
+            android:background="@color/color_drawer"
+            app:layout_constraintBottom_toBottomOf="@+id/textView4"
+            app:layout_constraintEnd_toEndOf="@+id/edittext8"
+            app:layout_constraintStart_toEndOf="@+id/textView4"
+            app:layout_constraintTop_toTopOf="@+id/textView4" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/textView4"
+            style="@style/text_view_dimention"
+            android:layout_marginTop="24dp"
+            android:text="@string/or"
+            android:textColor="@color/text_black_5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button" />
+
+
+        <TextView
+            android:id="@+id/tv_forgotPassword"
             style="@style/text_view_dimention"
             android:layout_marginTop="16dp"
             android:onClick="@{()-> viewModel.doForgotPasswordClick()}"
@@ -147,27 +139,28 @@
             app:layout_constraintStart_toStartOf="@+id/outlinedButton"
             app:layout_constraintTop_toBottomOf="@+id/outlinedButton" />
 
-    <TextView
-        android:id="@+id/textView8"
-       style="@style/text_view_dimention"
-        android:layout_marginStart="8dp"
-        android:text="@string/sign_up2"
-        android:textColor="@color/red"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/textView7"
-        app:layout_constraintStart_toEndOf="@+id/textView7"
-        app:layout_constraintTop_toTopOf="@+id/textView7"
-        android:onClick="@{()-> viewModel.doSignUpClick()}"/>
+        <TextView
+            android:id="@+id/textView8"
+            style="@style/text_view_dimention"
+            android:layout_marginStart="8dp"
+            android:onClick="@{()-> viewModel.doSignUpClick()}"
+            android:text="@string/sign_up2"
+            android:textColor="@color/primaryButtonColor"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/textView7"
+            app:layout_constraintStart_toEndOf="@+id/textView7"
+            app:layout_constraintTop_toTopOf="@+id/textView7" />
 
         <Button
             android:id="@+id/button"
-            android:layout_marginTop="70dp"
             style="@style/submit_button"
+            android:text="@{viewModel.buttonText}"
+            android:alpha="@{viewModel.isSignInEnabled()?1.0f:0.3f}"
+            android:layout_marginTop="16dp"
             android:onClick="@{()-> viewModel.doSignInClick()}"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.502"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edittext8" />
+            app:layout_constraintEnd_toEndOf="@+id/edittext8"
+            app:layout_constraintStart_toStartOf="@+id/edittext8"
+            app:layout_constraintTop_toBottomOf="@+id/tv_forgotPassword" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

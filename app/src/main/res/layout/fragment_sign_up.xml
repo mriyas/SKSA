@@ -45,7 +45,6 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     style="@style/edit_text"
-                    android:text="@={viewModel.mUser.username}"
                     android:textColorHint="@color/text_black_5" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -61,7 +60,6 @@
                >
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:text="@={viewModel.mUser.phoneNumber}"
                     style="@style/edit_text" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -77,7 +75,6 @@
                >
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:text="@={viewModel.mUser.email}"
                     style="@style/edit_text" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -92,7 +89,6 @@
                 >
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:text="@={viewModel.mUser.address}"
                     style="@style/edit_text" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -108,7 +104,6 @@
                 >
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:text="@={viewModel.mUser.password}"
                     style="@style/edit_text"/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -124,7 +119,6 @@
                 >
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:text="@={viewModel.mUser.password}"
                     style="@style/edit_text"/>
 
             </com.google.android.material.textfield.TextInputLayout>

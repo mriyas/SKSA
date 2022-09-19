@@ -2,9 +2,12 @@ package com.suraksha.android.database.datastore
 
 import android.content.Context
 import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.*
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.datastore.preferences.core.longPreferencesKey
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
-import com.suraksha.cloud.model.response.auth.UserDataResponse
+import com.suraksha.cloud.model.response.auth.SurakshaUser
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -38,9 +41,9 @@ suspend fun logout() {
             preferences[APP_ID] = appId
         }
     }
-    val getAppId: Flow<Int?>
+    val getAppId: Flow<Int>
         get() = context.datastore.data.map { preferences ->
-            preferences[APP_ID]
+            preferences[APP_ID]?:0
         }
 
 
@@ -55,27 +58,28 @@ suspend fun logout() {
             preferences[USER_NAME]
         }
 
-    suspend fun saveUserData(response: UserDataResponse) {
+    suspend fun saveUserData(response: SurakshaUser) {
         context.datastore.edit {
             it[USER_ID] = response.userId
             it[USER_TYPE] =response.userType
             it[TOKEN] = response.token
-            it[REFRESH_TOKEN] = response.refreshToken
+         //   it[REFRESH_TOKEN] = response.refreshToken
             it[USER_NAME] = response.userName
-            it[USER_PROFILE_URL] = response.profileUrl
+          //  it[USER_PROFILE_URL] = response.profileUrl
         }
     }
 
 
     fun getUserData() = context.datastore.data.map {
-        UserDataResponse(
-            userId = it[USER_ID]?:0L,
-            userType = it[USER_TYPE]?:0,
-            userName = it[USER_NAME]?:"",
-            profileUrl = it[USER_PROFILE_URL]?:"",
-            token = it[TOKEN]?:"",
-            refreshToken = it[REFRESH_TOKEN]?:"",
-        )
+        val user=SurakshaUser()
+        user.userId = it[USER_ID]?:0L
+        user.userType = it[USER_TYPE]?:0
+        user.userName = it[USER_NAME]?:""
+       // profileUrl = it[USER_PROFILE_URL]?:"",
+        user.token = it[TOKEN]?:""
+       // refreshToken = it[REFRESH_TOKEN]?:"",
+
+        user
     }
 
 
