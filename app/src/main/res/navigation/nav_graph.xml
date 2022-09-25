@@ -17,6 +17,14 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/goToPharmacy"
+            app:destination="@id/pharmacyDashboardFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
 
     </fragment>
 
@@ -25,6 +33,15 @@
         android:name="com.suraksha.android.view.fragment.lab.LabHomeFragment"
         android:label="labsHomeFragment"
         tools:layout="@layout/fragment_lab_home">
+
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/pharmacyDashboardFragment"
+        android:name="com.suraksha.android.view.fragment.pharmacy.PharmacyDashboradFragment"
+        android:label="pharmacyDashboardFragment"
+        tools:layout="@layout/fragment_pharmacy_dashboard">
 
 
     </fragment>

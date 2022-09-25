@@ -6,7 +6,7 @@
     <data>
         <variable
             name="data"
-            type="com.suraksha.cloud.model.response.lab.LabTest" />
+            type="com.suraksha.cloud.model.LabTest" />
         <variable
             name="clickHelper"
             type="com.suraksha.android.view.utility.callbacks.ClickHelper" />

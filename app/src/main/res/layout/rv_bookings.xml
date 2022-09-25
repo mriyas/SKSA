@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.suraksha.cloud.model.Bookings" />
+
+        <variable
+            name="clickHelper"
+            type="com.suraksha.android.view.utility.callbacks.ClickHelper" />
+    </data>
+
+
+    <LinearLayout
+        android:id="@+id/ll_main_test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{v->clickHelper.onClick(data)}"
+        android:orientation="vertical"
+        android:padding="@dimen/margin_10"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <TextView
+            android:id="@+id/tv_bookingId"
+            style="@style/text_title_3"
+            android:text="@{`Booking ID :`+data.bookingId}"
+            android:textAllCaps="false"
+            tools:text="Test Name" />
+
+        <TextView
+            android:id="@+id/tv_testName"
+            style="@style/text_title_3"
+            android:text="@{data.patientName}"
+            android:textSize="25sp"
+            android:textAllCaps="false"
+            tools:text="Test Name" />
+
+        <TextView
+            android:id="@+id/tv_testDesc"
+            style="@style/text_title_4"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@{data.location}"
+            android:textAllCaps="false"
+            tools:text="Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_testRate"
+            style="@style/text_title_3"
+            android:layout_width="wrap_content"
+            android:drawableStart="@drawable/ic_carbon_time"
+            android:drawablePadding="6dp"
+            android:gravity="center"
+            android:text="@{data.timeSlot}"
+            android:textSize="12sp"
+            tools:text="150" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginTop="@dimen/margin_5"
+            android:background="@color/black" />
+
+    </LinearLayout>
+
+</layout>

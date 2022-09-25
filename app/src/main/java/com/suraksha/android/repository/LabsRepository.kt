@@ -2,16 +2,8 @@ package com.suraksha.android.repository
 
 import com.suraksha.cloud.ApiState
 import com.suraksha.cloud.datasource.LabsDataSource
-import com.suraksha.cloud.model.request.AppRegistrationRequest
-import com.suraksha.cloud.model.request.LoginRequest
-import com.suraksha.cloud.model.request.OtpGenerationRequest
-import com.suraksha.cloud.model.request.OtpValidateRequest
-import com.suraksha.cloud.model.response.AppRegistrationResponse
-import com.suraksha.cloud.model.response.auth.OtpGenerateResponse
-import com.suraksha.cloud.model.response.auth.OtpVerifyResponse
-import com.suraksha.cloud.model.response.auth.SurakshaUser
 import com.suraksha.cloud.model.response.lab.CreateTestsResponse
-import com.suraksha.cloud.model.response.lab.LabTest
+import com.suraksha.cloud.model.LabTest
 import com.suraksha.cloud.model.response.lab.LabsTestsResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -35,8 +27,22 @@ class LabsRepository @Inject constructor(private val labsDataSource: LabsDataSou
         }.flowOn(Dispatchers.IO)
     }
 
+    suspend fun getTestDetails(id: String): Flow<ApiState<LabTest>> {
 
-    suspend fun createTest(request: LabTest,isEdit:Boolean=false): Flow<ApiState<CreateTestsResponse>> {
+        return flow {
+            emit(ApiState.loading())
+            val result = labsDataSource.getTestDetails(id)
+
+            //Cache to database if response is successful
+            if (result.status == ApiState.Status.SUCCESS) {
+                //do db operations
+            }
+            emit(result)
+        }.flowOn(Dispatchers.IO)
+    }
+
+
+    suspend fun createTest(request: LabTest, isEdit:Boolean=false): Flow<ApiState<CreateTestsResponse>> {
 
         return flow {
             emit(ApiState.loading())

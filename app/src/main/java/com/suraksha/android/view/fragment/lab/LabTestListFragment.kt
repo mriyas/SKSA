@@ -11,7 +11,7 @@ import com.suraksha.android.view_model.LabsViewModel
 import com.suraksha.app.R
 import com.suraksha.app.databinding.FragmentLabTestListBinding
 import com.suraksha.cloud.ApiState
-import com.suraksha.cloud.model.response.lab.LabTest
+import com.suraksha.cloud.model.LabTest
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.util.*
@@ -93,7 +93,7 @@ class LabTestListFragment : BaseFragment() {
     }
 
     override fun onClick(vararg data: Any) {
-       val test=data[0]
+        val test=data[0]
         if(test is LabTest){
             navigate(LabTestListFragmentDirections.goToDetailsPage(test))
         }

@@ -62,12 +62,23 @@ object AppDependencies {
         const val navTest = "androidx.navigation:navigation-testing:${Versions.navVersion}"
     }
 
+    object GlideDependencies{
+        const val glide = "com.github.bumptech.glide:glide:4.13.2"
+        const val processor =  "com.github.bumptech.glide:compiler:4.13.2"
+    }
+
     val uiLibraries = arrayListOf<String>().apply {
         add(material)
         add(coreKtx)
         add(appcompat)
         add(constraintLayout)
     }
+    val glide = arrayListOf<String>().apply {
+        add(GlideDependencies.glide)
+        add(GlideDependencies.processor)
+
+    }
+
 
     val navLibraries = arrayListOf<String>().apply {
         add(navKtx)

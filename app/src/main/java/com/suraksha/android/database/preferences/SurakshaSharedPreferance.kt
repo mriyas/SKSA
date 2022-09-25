@@ -199,6 +199,7 @@ class SurakshaSharedPreferance {
 
     interface Constants {
         companion object {
+            val SERVICE="SERVICE"
             val SENSOR_BG_SCAN_UPDATE_INTERVAL = "sensor_bg_interval"
             val MY_GCM_REG_ID = "gcm_id"
             val MY_WEB_SERVICE_URL = "my_url"

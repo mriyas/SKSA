@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
+    android:id="@id/nav_graph"
     app:startDestination="@id/fragment_dashboard">
     <fragment
         android:id="@+id/fragment_dashboard"
@@ -10,18 +10,18 @@
         android:label="fragment_dashboard_1"
         tools:layout="@layout/fragment_dashboard_1" />
     <fragment
-        android:id="@+id/fragment_chat"
-        android:name="com.suraksha.android.view.fragment.dashboard.ChatFragment"
+        android:id="@+id/fragment_booking"
+        android:name="com.suraksha.android.view.fragment.booking.BookingListFragment"
         android:label="fragment_chat"
-        tools:layout="@layout/fragment_chat" />
+        tools:layout="@layout/fragment_bookings_home" />
     <fragment
         android:id="@+id/fragment_settings"
-        android:name="com.suraksha.android.view.fragment.dashboard.SettingsFragment"
+        android:name="com.suraksha.android.view.fragment.profile.ProfileFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/fragment_profile"
-        android:name="com.suraksha.android.view.fragment.dashboard.SettingsFragment"
+        android:name="com.suraksha.android.view.fragment.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>

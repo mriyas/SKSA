@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@id/nav_graph"
+    app:startDestination="@id/fragment_medicine_list">
+    <fragment
+        android:id="@+id/fragment_medicine_list"
+        android:name="com.suraksha.android.view.fragment.pharmacy.MedicineListFragment"
+
+        tools:layout="@layout/fragment_medicine_list">
+        <action
+            android:id="@+id/goMedicineDetailPage"
+            app:destination="@id/detailsPage"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/goToAdd"
+            app:destination="@id/lab_test_add_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailsPage"
+        android:name="com.suraksha.android.view.fragment.pharmacy.MedicineDetailsFragment"
+        tools:layout="@layout/fragment_pharmacy_detail">
+
+        <argument
+            android:name="medicine"
+            app:argType="com.suraksha.cloud.model.Medicines"
+            app:nullable="true" />
+    </fragment>
+
+</navigation>

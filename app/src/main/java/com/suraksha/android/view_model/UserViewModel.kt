@@ -4,6 +4,7 @@ import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.suraksha.android.SurakshaApplication
+import com.suraksha.android.database.preferences.SurakshaSharedPreferance
 import com.suraksha.android.model.error.UserErrors
 import com.suraksha.android.repository.UserRepository
 import com.suraksha.app.R
@@ -46,7 +47,7 @@ class UserViewModel @Inject constructor(
 
     init {
 
-        doForgotPasswordClick()
+  //      doForgotPasswordClick()
         buttonText.value=application.getString(R.string.sign_in)
     }
 
@@ -181,15 +182,20 @@ class UserViewModel @Inject constructor(
     }
 
     fun isUserLoggedIn(): Boolean {
-        var user:SurakshaUser?=null
-        runBlocking(Dispatchers.IO) {
-            user = getUserData()?.first()
-        }
-        var userId=user?.userId?:0
 
-        return userId>0
+
+        return !getToken().isNullOrEmpty()
     }
 
+    fun doLogout(){
+        clearToken()
+    }
+
+    private fun clearToken() {
+        val pref= SurakshaSharedPreferance(mContext)
+        pref.clear()
+
+    }
 
 
     fun generateOtp(errorModel: UserErrors?) {
@@ -201,8 +207,10 @@ class UserViewModel @Inject constructor(
     }
 
 
-    fun doSignUp() {
+    private fun doSignUp() {
 
+        email="seethapharma@gmail.com"
+        password="Qwe@123456"
     }
 
     fun doFacebookSignup() {
@@ -223,8 +231,8 @@ class UserViewModel @Inject constructor(
 
     fun doForgotPasswordClick() {
 
-        email="aswathysh64@gmail.com"
-        password="Qwe@12345"
+        email="lab@healthbuss.in"
+        password="Qwe@123456"
     }
 
     fun doSignInClick() {
@@ -233,7 +241,7 @@ class UserViewModel @Inject constructor(
     }
 
     fun doSignUpClick() {
-
+ doSignUp()
     }
 
 

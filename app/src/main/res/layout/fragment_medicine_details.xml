@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.suraksha.android.view_model.LabsViewModel" />
+        <variable
+            name="clickHelper"
+            type="com.suraksha.android.view.utility.callbacks.ClickHelper" />
+
+        <variable
+            name="bookings"
+            type="com.suraksha.cloud.model.Medicines" />
+
+    </data>
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+
+                style="@style/RootLayout">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_delete"
+                    android:onClick="@{v->clickHelper.onWorkInProgress()}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_margin="@dimen/margin_16"
+                    app:srcCompat="@drawable/ic_delete"/>
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_edit"
+                    android:onClick="@{v->clickHelper.onWorkInProgress()}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_16"
+                    app:layout_constraintEnd_toStartOf="@+id/iv_delete"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_bxs_edit"/>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_16"
+                    android:elevation="@dimen/margin_16"
+                    android:minHeight="120dp"
+                    app:cardCornerRadius="@dimen/margin_16"
+                    app:cardElevation="@dimen/margin_16"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_delete">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+
+                        style="@style/RootLayout">
+
+                        <TextView
+                            android:id="@+id/tv_medicineIdLabel"
+                            style="@style/text_title_5"
+                            android:text="@string/medicine_id"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_medicineId"
+                            style="@style/text_title_6"
+                            android:layout_width="wrap_content"
+
+                            android:text="@{'#'+bookings.medicineId}"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/tv_medicineIdLabel"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="#1234" />
+
+                        <TextView
+                            android:layout_marginTop="@dimen/margin_10"
+                            android:id="@+id/tv_medicineNameLabel"
+                            style="@style/text_title_5"
+                            android:text="@string/medicine_name"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tv_medicineIdLabel" />
+
+                        <TextView
+                            android:id="@+id/tv_medicineName"
+                            style="@style/text_title_6"
+                            android:layout_width="0dp"
+
+                            android:text="@{'#'+bookings.medicineName}"
+                            app:layout_constraintStart_toEndOf="@+id/tv_medicineNameLabel"
+                            app:layout_constraintTop_toTopOf="@id/tv_medicineNameLabel"
+                            tools:text="Riyas" />
+
+                       <!-- "bookingId": 27,
+                        "patientName": "aswanj",
+                        "price": 100.9,
+                        "timeSlot": "7.00AM to 10AM",
+                        "location": "trivandrum",-->
+
+
+                        <TextView
+                            android:id="@+id/tv_medicinePrescLabel"
+                            style="@style/text_title_5"
+                            android:layout_marginTop="@dimen/margin_10"
+
+                            android:text="@string/prescription"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tv_medicineNameLabel" />
+
+                        <TextView
+                            android:id="@+id/tv_medicinePresc"
+                            style="@style/text_title_6"
+
+                            android:text="@{bookings.prescription}"
+                            app:layout_constraintLeft_toRightOf="@id/tv_medicinePrescLabel"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/tv_medicinePrescLabel"
+                            tools:text="Text box 2 yyyyyyyyyy" />
+
+                        <TextView
+                            android:id="@+id/tv_medicineCompositionLabel"
+                            style="@style/text_title_5"
+                            android:layout_marginTop="@dimen/margin_10"
+
+                            android:text="@string/medical_composition"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toLeftOf="@+id/tv_medicinePresc"
+                            app:layout_constraintTop_toBottomOf="@id/tv_medicinePresc" />
+
+                        <TextView
+                            android:id="@+id/tv_medicineComposition"
+                            style="@style/text_title_6"
+
+                            android:text="@{bookings.medicalComposition}"
+                            app:layout_constraintLeft_toRightOf="@id/tv_medicineCompositionLabel"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/tv_medicineCompositionLabel"
+                            tools:text="Text box 2 yyyyyyyyyy" />
+
+                        <TextView
+                            android:id="@+id/tv_priceLabel"
+                            style="@style/text_title_5"
+                            android:layout_marginTop="@dimen/margin_10"
+
+                            android:text="@string/price"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toLeftOf="@+id/tv_medicineComposition"
+                            app:layout_constraintTop_toBottomOf="@id/tv_medicineCompositionLabel" />
+
+                        <TextView
+                            android:id="@+id/tv_price"
+                            style="@style/text_title_6"
+
+                            android:text="@{bookings.price+` INR`}"
+                            app:layout_constraintLeft_toRightOf="@id/tv_priceLabel"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/tv_priceLabel"
+                            tools:text="150 INR" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+</layout>

@@ -118,6 +118,20 @@
     <string name="description">Description</string>
     <string name="create_test">Create Test</string>
     <string name="edit_test">Edit Test</string>
+    <string name="bookings">Bookings</string>
+    <string name="time_slot">Time Slot</string>
+    <string name="slot_1">Slot 1</string>
+    <string name="no_of_bookings">No of bookings</string>
+    <string name="slot_2">Slot 2</string>
+    <string name="slot_3">Slot 3</string>
+    <string name="booking_id">Booking Id :</string>
+    <string name="patient_name">Patient Name :</string>
+    <string name="log_out">Logout</string>
+    <string name="medicines">Medicines</string>
+    <string name="medicine_id">Medicine Id :</string>
+    <string name="medicine_name">Medicine Name :</string>
+    <string name="prescription">Prescription</string>
+    <string name="medical_composition">Medical Composition</string>
 
 
 </resources>

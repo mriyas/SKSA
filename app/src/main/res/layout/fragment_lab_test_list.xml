@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.suraksha.android.view_model.LabsViewModel" />
+            type="com.suraksha.android.view_model.BaseViewModel" />
         <variable
             name="clickHelper"
             type="com.suraksha.android.view.utility.callbacks.ClickHelper" />

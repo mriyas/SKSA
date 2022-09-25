@@ -2,8 +2,7 @@ package com.suraksha.cloud
 
 import android.content.Context
 import com.google.gson.GsonBuilder
-import com.suraksha.cloud.services.LabsApiService
-import com.suraksha.cloud.services.UserApiService
+import com.suraksha.cloud.services.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -85,5 +84,15 @@ class NetworkModule {
     @Provides
     fun provideLabsApiService(retrofit: Retrofit): LabsApiService =
         retrofit.create(LabsApiService::class.java)
+    @Provides
+    fun provideBookingApiService(retrofit: Retrofit): BookingApiService =
+        retrofit.create(BookingApiService::class.java)
 
+    @Provides
+    fun provideTimeSlotApiService(retrofit: Retrofit): TimeSlotApiService =
+        retrofit.create(TimeSlotApiService::class.java)
+
+    @Provides
+    fun provideMedicineApiService(retrofit: Retrofit): MedicineApiService =
+        retrofit.create(MedicineApiService::class.java)
 }

@@ -10,4 +10,5 @@ interface ClickHelper {
 
     fun onClick(vararg data:Any)
 
+    fun onWorkInProgress()
 }

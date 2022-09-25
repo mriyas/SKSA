@@ -14,7 +14,7 @@
 
         <variable
             name="test"
-            type="com.suraksha.cloud.model.response.lab.LabTest" />
+            type="com.suraksha.cloud.model.LabTest" />
 
     </data>
 
@@ -35,7 +35,7 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv_delete"
-                    android:onClick="@{v->clickHelper.onClick(v)}"
+                    android:onClick="@{v->clickHelper.onWorkInProgress()}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"

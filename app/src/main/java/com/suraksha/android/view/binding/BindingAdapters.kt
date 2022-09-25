@@ -1,10 +1,12 @@
 package com.suraksha.android.view.binding
 
+import android.graphics.drawable.Drawable
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.google.android.material.textfield.TextInputLayout
+import com.suraksha.app.R
 
 
 @BindingAdapter("android:src")
@@ -47,5 +49,20 @@ fun setProfileImage(imageView: ImageView, profileImage: String?) {
     }
 }
 
+@BindingAdapter("image","placeholder")
+fun setImage(image: ImageView, imageUrl: String?, placeHolder: Drawable) {
+
+    if (!imageUrl.isNullOrEmpty()){
+
+        Glide.with(image.context).load(imageUrl).centerCrop()
+            .placeholder(placeHolder)
+            .into(image)
+    }
+    else{
+        image.setImageDrawable(placeHolder)
+    }
+
+
+}
 
 

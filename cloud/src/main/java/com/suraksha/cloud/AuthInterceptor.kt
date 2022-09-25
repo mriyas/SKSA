@@ -6,7 +6,8 @@ import okhttp3.Response
 class AuthInterceptor (private val token: String,private val appId: Long) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
-
+        val token=CloudConnector.connectorInterface?.getToken() ?: "hello"
+       val appId= CloudConnector.connectorInterface?.getAppId() ?: 0
         val newRequest = chain.request().newBuilder()
             .addHeader("Authorization", "Bearer $token")
             .addHeader("token",  "$token")

@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.suraksha.android.view.utility.callbacks.ClickHelper
 import com.suraksha.app.BR
 import com.suraksha.app.R
-import com.suraksha.cloud.model.response.lab.LabTest
+import com.suraksha.cloud.model.LabTest
 import java.util.*
 import kotlin.collections.ArrayList
 

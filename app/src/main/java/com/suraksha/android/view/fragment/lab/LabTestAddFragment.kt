@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.text.isDigitsOnly
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
@@ -12,7 +13,7 @@ import com.suraksha.android.view_model.LabsViewModel
 import com.suraksha.app.R
 import com.suraksha.app.databinding.FragmentLabTestAddBinding
 import com.suraksha.cloud.ApiState
-import com.suraksha.cloud.model.response.lab.LabTest
+import com.suraksha.cloud.model.LabTest
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -63,8 +64,11 @@ class LabTestAddFragment : BaseFragment() {
 
     private fun setSpinners(test: LabTest?) {
         val spConfidentialityPosition =
-            if (test?.confidentiality.isNullOrEmpty()) 0 else test?.confidentiality?.toInt() ?: 0
+            if (test?.confidentiality.isNullOrEmpty()&&test?.confidentiality?.isDigitsOnly()==true) 0 else test?.confidentiality?.toInt() ?: 0
         mBinding.spConfidentiality.setSelection(spConfidentialityPosition)
+        val spPrescPosition =
+            if (test?.prescription.isNullOrEmpty()&&test?.prescription?.isDigitsOnly()==true) 0 else test?.prescription?.toInt() ?: 0
+        mBinding.spPresc.setSelection(spPrescPosition)
         val departments = resources.getStringArray(R.array.departments)
         val spDeptPosition = departments.indexOf(test?.department)
         if (spDeptPosition >= 0) {
@@ -82,6 +86,7 @@ class LabTestAddFragment : BaseFragment() {
                 val test = mLabsViewModel.mTest.value
                 test?.department = mBinding.spDepartement.selectedItem.toString()
                 test?.confidentiality = mBinding.spConfidentiality.selectedItemPosition.toString()
+                test?.prescription = mBinding.spPresc.selectedItemPosition.toString()
 
                 mLabsViewModel.createTest(isEdit())
 
@@ -103,11 +108,9 @@ class LabTestAddFragment : BaseFragment() {
                     }
                     ApiState.Status.SUCCESS -> {
                         //  showSnackBar("Login Success")
-                        if (isEdit()) {
-                            navigate(LabTestAddFragmentDirections.goToList())
-                        } else {
+
                             goBack()
-                        }
+                        
                     }
                     ApiState.Status.ERROR -> {
                         showSnackBarError(it.error?.errorMessage)

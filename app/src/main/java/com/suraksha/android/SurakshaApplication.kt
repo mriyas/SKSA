@@ -22,7 +22,8 @@ class SurakshaApplication : Application(), CloudConnector.CloudConnectorInterfac
     }
 
     override fun getToken(): String {
-       return viewModel?.getToken().toString()
+       val token= viewModel?.getToken().toString()
+        return token
     }
     override fun getAppId(): Long {
         return viewModel?.getAppId()?.toLong()?:0

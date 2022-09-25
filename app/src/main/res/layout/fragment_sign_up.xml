@@ -219,7 +219,7 @@
                 android:id="@+id/button"
                 style="@style/submit_button"
                 android:layout_marginTop="45dp"
-                android:onClick="@{()-> viewModel.doSignUp()}"
+                android:onClick="@{()-> viewModel.doSignUpClick()}"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 app:layout_constraintEnd_toEndOf="@+id/edittext6"
                 app:layout_constraintHorizontal_bias="0.458"

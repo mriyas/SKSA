@@ -49,6 +49,8 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+
 }
 
 dependencies {
@@ -59,6 +61,8 @@ dependencies {
     implementation(AppDependencies.rxLibraries)
     implementation(AppDependencies.dataStoreLibraries)
     implementation(AppDependencies.retrofitCloudLibraries)
+    implementation(AppDependencies.glide)
+
     implementation(project(mapOf("path" to ":cloud")))
     implementation("androidx.navigation:navigation-fragment-ktx:2.5.2")
     implementation("androidx.navigation:navigation-ui-ktx:2.5.2")
@@ -85,7 +89,6 @@ dependencies {
     implementation  ("com.google.firebase:firebase-messaging-ktx")
     implementation("com.google.firebase:firebase-core")
     // glide
-    implementation ("com.github.bumptech.glide:glide:4.12.0")
 
     implementation ("com.android.support:design:29.1.1")
     implementation ("androidx.legacy:legacy-support-v4:1.0.0")

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/time_slot_add_fragment">
+    <fragment
+        android:id="@+id/time_slot_add_fragment"
+        android:name="com.suraksha.android.view.fragment.time_slot.TimeSlotAddFragment"
+
+        tools:layout="@layout/fragment_time_slot_add">
+        <action
+            android:id="@+id/goToDetailsPage"
+            app:destination="@id/labDetailsPage"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/goToAdd"
+            app:destination="@id/lab_test_add_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/labDetailsPage"
+        android:name="com.suraksha.android.view.fragment.lab.LabTestDetailsFragment"
+        tools:layout="@layout/fragment_lab_test_details">
+
+        <argument
+            android:name="test"
+            app:argType="com.suraksha.cloud.model.LabTest"
+            app:nullable="true" />
+        <action
+            android:id="@+id/goToEdit"
+            app:destination="@id/lab_test_add_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/lab_test_add_fragment"
+        android:name="com.suraksha.android.view.fragment.lab.LabTestAddFragment"
+        tools:layout="@layout/fragment_lab_test_add">
+        <action
+            android:id="@+id/goToList"
+            app:popUpTo="@id/lab_tests_fragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <argument
+            android:name="test"
+            app:argType="com.suraksha.cloud.model.LabTest"
+            app:nullable="true" />
+    </fragment>
+
+</navigation>

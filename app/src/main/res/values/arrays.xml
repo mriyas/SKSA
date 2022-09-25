@@ -15,6 +15,18 @@
         <item>YES</item>
     </string-array>
 
+    <string-array name="required">
+        <item>Not Required</item>
+        <item>Required</item>
+    </string-array>
+    <string-array name="no_of_slots">
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
+
     <string-array name="departments">
         <item> Bio chemistry</item>
         <item>Hematology</item>

@@ -36,6 +36,7 @@ abstract class BaseDataSource {
             }
             return error(response.code(),response.message())
         } catch (e: Exception) {
+            e.printStackTrace()
             return error(EXCEPTION, APIError.ErrorMessages.EXCEPTION)
         }
     }

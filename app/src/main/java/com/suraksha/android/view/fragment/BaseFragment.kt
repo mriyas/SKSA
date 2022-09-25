@@ -47,6 +47,9 @@ abstract class BaseFragment : Fragment(), ClickHelper {
         const val PERMISSION_ALL: Int = 1
     }
 
+    override fun onWorkInProgress() {
+        showSnackBar("Work in progress !!")
+    }
     protected fun navigate(navDirections: NavDirections) {
         try {
             if (navDirections != null) {
@@ -286,4 +289,5 @@ abstract class BaseFragment : Fragment(), ClickHelper {
         val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(requireView().windowToken, 0)
     }
+
 }

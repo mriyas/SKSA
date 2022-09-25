@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.suraksha.android.database.datastore.DataStoreManager
+import com.suraksha.android.database.preferences.SurakshaSharedPreferance
 import com.suraksha.android.model.error.UserErrors
 import com.suraksha.cloud.ApiState
 import com.suraksha.cloud.model.response.AppRegistrationResponse
@@ -66,6 +67,11 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
     fun saveUserData(response: SurakshaUser){
         viewModelScope.launch() {
             mDataStoreManager?.saveUserData(response)
+            val pref=SurakshaSharedPreferance(mContext)
+            pref.setStringPrefValue(SurakshaSharedPreferance.Constants.MY_WEB_SERVICE_TOKEN,response.token)
+            pref.setLongPrefValue(SurakshaSharedPreferance.Constants.APP_ID,getAppId().toLong())
+            pref.setIntegerPrefValue(SurakshaSharedPreferance.Constants.SERVICE,response.service)
+            pref.setIntegerPrefValue(SurakshaSharedPreferance.Constants.USER_TYPE,response.userType)
         }
     }
 
@@ -75,20 +81,21 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
 
 
 
+    fun getLoggedInService():Pair<Int,Int>{
+        val pref=SurakshaSharedPreferance(mContext)
+        var service=pref.getIntegerPrefValue(SurakshaSharedPreferance.Constants.SERVICE)
+        var type=pref.getIntegerPrefValue(SurakshaSharedPreferance.Constants.USER_TYPE)
+
+
+        return Pair(service,type)
+    }
+
+
 
     fun getToken(): String? {
-        var token = null as String?
-        runBlocking {
-            viewModelScope.launch {
-                getUserData()?.catch { e ->
-                    e.printStackTrace()
-                }?.collect {
-                    token = it?.token
-                }
-            }
-        }
-      /*  if(token?.isNullOrEmpty()==true)
-            logout()*/
+          val pref=SurakshaSharedPreferance(mContext)
+           var token=pref.getStringPrefValue(SurakshaSharedPreferance.Constants.MY_WEB_SERVICE_TOKEN)
+
         return token
 
     }

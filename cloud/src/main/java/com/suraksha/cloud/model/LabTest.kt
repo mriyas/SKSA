@@ -1,4 +1,4 @@
-package com.suraksha.cloud.model.response.lab
+package com.suraksha.cloud.model
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
